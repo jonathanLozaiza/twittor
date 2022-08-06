@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -14,11 +15,12 @@ import (
 
 func Manejadores() {
 	router := mux.NewRouter()
-
+	fmt.Println("baby")
 	//routes
 	router.HandleFunc("/registro", middleware.ChequeoBD(routes.Registro)).Methods("POST")
 	router.HandleFunc("/login", middleware.ChequeoBD(routes.Login)).Methods("POST")
-	router.HandleFunc("/verperfil", middleware.ChequeoBD(middleware.ValidoJWT(routes.VerPerfil))).Methods("POST")
+	router.HandleFunc("/verperfil", middleware.ChequeoBD(middleware.ValidoJWT(routes.VerPerfil))).Methods("GET")
+	router.HandleFunc("/modificarperfil", middleware.ChequeoBD(middleware.ValidoJWT(routes.ModificarPerfil))).Methods("PUT")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {

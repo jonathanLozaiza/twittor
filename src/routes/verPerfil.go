@@ -2,12 +2,14 @@ package routes
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"twitter/src/db"
 )
 
 func VerPerfil(w http.ResponseWriter, r *http.Request) {
 	ID := r.URL.Query().Get("id")
+	fmt.Println(ID)
 	if len(ID) < 1 {
 		http.Error(w, "Debe enviar el parametro ID", http.StatusBadRequest)
 		return
